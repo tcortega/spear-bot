@@ -1,0 +1,14 @@
+.vscode
+.github
+node_modules
+.env
+.gitignore
+.node-version
+.prettierrc
+docker-compose.yml
+config.json
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+Procfile
+_IGNORE_**
+**.data.json
