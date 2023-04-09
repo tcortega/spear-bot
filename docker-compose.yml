@@ -1,0 +1,40 @@
+version: '3.9'
+services:
+  db:
+    image: postgres
+    hostname: plsql-db
+    ports:
+      - '5432:5432'
+    volumes:
+      - 'pgsqldata:/var/lib/postgresql/data'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: P4$$$$w0rd
+      POSTGRES_DB: Spear
+    restart: always
+
+  socket-server:
+    image: openwa/wa-automate:latest
+    restart: always
+    hostname: socket-server
+    command: ['--socket', '--license-key <YOUR_LICENSE>', '-k spear_secret_key']
+    ports:
+      - '8085:8002'
+    volumes:
+      - 'socketdata:/usr/src/app'
+
+  spear-bot:
+    image: tcortega/spear-bot:1.2.0
+    restart: always
+    depends_on:
+      - socket-server
+    hostname: spear-bot
+    environment:
+      - 'LOCALE=pt_BR'
+      - 'SOCKET_API_URL=http://socket-server:8002'
+      - 'SOCKET_API_KEY=spear_secret_key'
+      - 'OPENAI_ACCESS_TOKEN=<YOUR_ACCESS_TOKEN>'
+
+volumes:
+  pgsqldata:
+  socketdata:

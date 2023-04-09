@@ -1,0 +1,42 @@
+{
+  "name": "spear-ts",
+  "version": "1.2.0",
+  "description": "A WhatsApp bot built using @open-wa/wa-automate",
+  "exports": "./build/index.js",
+  "repository": "https://github.com/tcortega/Spear",
+  "author": "Tarcisio Ortega",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "start": "node build/src/index.js",
+    "dev": "ts-node --esm src/index.ts",
+    "watch": "nodemon src/index.ts",
+    "prod": "npm run build && node ./build/src/index.js",
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "build": "tsc --build",
+    "fix": "gts fix",
+    "prettier": "prettier --config .prettierrc --write ."
+  },
+  "dependencies": {
+    "@open-wa/wa-automate-socket-client": "^3.2.0",
+    "@open-wa/wa-decrypt": "^4.4.0",
+    "@tcortega/chatgpt": "^5.4.2",
+    "dotenv": "^16.0.3",
+    "i18n": "^0.15.0",
+    "p-queue": "^7.3.4"
+  },
+  "devDependencies": {
+    "@open-wa/wa-automate-types-only": "^4.55.0",
+    "@types/i18n": "^0.13.4",
+    "@types/node": "^14.11.2",
+    "@types/retry": "^0.12.2",
+    "gts": "^3.1.0",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.4.1",
+    "typescript": "^5.0.3"
+  }
+}

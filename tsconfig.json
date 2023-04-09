@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "build",
+    "skipLibCheck": true,
+    "module": "nodenext",
+    "target": "es2022",
+    "moduleResolution": "nodenext",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "strictPropertyInitialization": false
+  },
+  "include": ["src/**/*.ts", "src/locales/*.json"],
+  "exclude": ["/.github", "./build", "./node_modules"]
+}

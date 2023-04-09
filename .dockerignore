@@ -1,0 +1,16 @@
+.vscode
+.github
+.env
+.env.example
+.gitignore
+.node-version
+.prettierrc
+node_modules/
+build/
+docker-compose.yml
+docker-compose.example.yml
+config.json
+config.example.json
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+Procfile

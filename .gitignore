@@ -1,0 +1,32 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+# Dependencies
+node_modules/
+*.lock
+# Coverage
+coverage
+# Transpiled files
+build/
+# VS Code
+.vscode
+!.vscode/tasks.js
+# JetBrains IDEs
+.idea/
+# Optional npm cache directory
+.npm
+# Optional eslint cache
+.eslintcache
+# Misc
+.DS_Store
+results/*.*
+.env
+
+# managed
+**.data.json
+**.node-persist**
+**_IGNORE_**
+config.json
+docker-compose.yml
+# end managed

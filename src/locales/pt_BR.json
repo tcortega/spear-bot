@@ -1,0 +1,43 @@
+{
+  "ping": {
+    "description": "Mostra a média do tempo de resposta do bot.",
+    "result": "📈 Ping médio do Bot: {ping} ms"
+  },
+  "imagine": {
+    "description": "Gera uma imagem a partir do texto enviado.",
+    "receivedRequest": "⌛ Beleza! Deixa só eu pegar o papel e a caneta aqui",
+    "result": "✏ Terminei, ficou legal?",
+    "nsfw": "🔞 Você não pode tentar imaginar isso aqui, é muito perigoso! Olha em que mês estamos!!!!"
+  },
+  "common": {
+    "error": "❌ Ocorreu um erro inesperado, tente novamente mais tarde."
+  },
+  "sticker": {
+    "description": "Gera um sticker a partir de uma mídia enviada junta ao comando, ou à uma mídia respondida.",
+    "receivedRequest": "⌛ Processando... Aguarde só um momento.",
+    "pack": "Criado Por"
+  },
+  "bot": {
+    "name": "Spear"
+  },
+  "eleicao": {
+    "description": "Comando que habilita bot a mandar resultados da eleição no grupo/chat utilizado",
+    "success": "✅ A partir de agora vou começar a enviar os dados da eleição aqui sempre que houver alterações.",
+    "disabled": "❌ A partir de agora não vou mais enviar os dados da eleição aqui."
+  },
+  "chatgpt": {
+    "description": "🤖 Converse com a IA da OpenAI",
+    "usage": "ℹ️ Use '!c reset' para redefinir uma conversa. Use '!c' seguido de uma mensagem para conversar com a IA.",
+    "error": "❌ Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente mais tarde.",
+    "reset": "✅ Conversa redefinida com sucesso.",
+    "processing": "⏳ Estou pensando na resposta, só um segundinho...",
+    "missingApiKey": "❌ É preciso configurar as chaves de acesso ao ChatGPT corretamente..."
+  },
+  "help": {
+    "description": "help.description"
+  },
+  "version": {
+    "description": "Mostra a versão atual do bot",
+    "result": "🤖 Versão atual do bot: {version}"
+  }
+}
