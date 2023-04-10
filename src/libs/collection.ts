@@ -17,7 +17,7 @@ export default class Collection<K, V> {
     }
   }
 
-  getValues(): V[] {
+  toArray(): V[] {
     return Array.from(this.values.values());
   }
 }

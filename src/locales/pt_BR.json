@@ -13,7 +13,7 @@
     "error": "❌ Ocorreu um erro inesperado, tente novamente mais tarde."
   },
   "sticker": {
-    "description": "Gera um sticker a partir de uma mídia enviada junta ao comando, ou à uma mídia respondida.",
+    "description": "🎨 Gera um sticker a partir de uma mídia enviada junta ao comando, ou à uma mídia respondida.",
     "receivedRequest": "⌛ Processando... Aguarde só um momento.",
     "pack": "Criado Por"
   },
@@ -26,18 +26,22 @@
     "disabled": "❌ A partir de agora não vou mais enviar os dados da eleição aqui."
   },
   "chatgpt": {
-    "description": "🤖 Converse com a IA da OpenAI",
+    "description": "🤖 Converse com o robô",
     "usage": "ℹ️ Use '!c reset' para redefinir uma conversa. Use '!c' seguido de uma mensagem para conversar com a IA.",
     "error": "❌ Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente mais tarde.",
     "reset": "✅ Conversa redefinida com sucesso.",
     "processing": "⏳ Estou pensando na resposta, só um segundinho...",
-    "missingApiKey": "❌ É preciso configurar as chaves de acesso ao ChatGPT corretamente..."
+    "missingApiKey": "❌ É preciso configurar as chaves de acesso ao ChatGPT..."
   },
   "help": {
-    "description": "help.description"
+    "description": "ℹ️ Exibe a lista de comandos disponíveis e suas descrições",
+	"title": "*🤖 Comandos do Bot 🤖*\n\n",
+	"groupOnly": "👥 *Apenas para grupos*\n",
+	"adminOnly": "⚠️ *Apenas para administradores*\n",
+	"aliases": "🔀 *Apelidos:* {aliases}\n"
   },
   "version": {
-    "description": "Mostra a versão atual do bot",
+    "description": "ℹ️ Mostra a versão atual do bot",
     "result": "🤖 Versão atual do bot: {version}"
   }
 }
