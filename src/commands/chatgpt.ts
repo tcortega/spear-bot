@@ -15,33 +15,33 @@ const api = new ChatGPTUnofficialProxyAPI({
 const conversations = new Map<string, { conversationId: string; parentMessageId: string }>();
 
 export const command: Command = {
-  name: 'c',
-  aliases: ['chatgpt', 'gpt'],
-  description: i18n.__mf('chatgpt.description'),
+  name: 'conversar',
+  aliases: ['c'],
+  description: i18n.__('chatgpt.description'),
   async execute(msg: Message, args: string[]): Promise<void> {
     if (!config.OPENAI_ACCESS_TOKEN) {
-      await bot.client.reply(msg.chatId, i18n.__mf('chatgpt.missingApiKey'), msg.id);
+      await bot.client.reply(msg.chatId, i18n.__('chatgpt.missingApiKey'), msg.id);
       return;
     }
 
     const author = `${msg.chatId}:${msg.author}`;
 
     if (!args.length) {
-      await bot.client.reply(msg.chatId, i18n.__mf('chatgpt.usage'), msg.id);
+      await bot.client.reply(msg.chatId, i18n.__('chatgpt.usage'), msg.id);
       return;
     }
 
     const firstArg = args[0].toLocaleLowerCase();
     if (firstArg === 'reset') {
       conversations.delete(author);
-      await bot.client.reply(msg.chatId, i18n.__mf('chatgpt.reset'), msg.id);
+      await bot.client.reply(msg.chatId, i18n.__('chatgpt.reset'), msg.id);
       return;
     }
 
     const conversationData = conversations.get(author) ?? {};
     const messageOptions = { ...conversationData };
 
-    await bot.client.reply(msg.chatId, i18n.__mf('chatgpt.processing'), msg.id);
+    await bot.client.reply(msg.chatId, i18n.__('chatgpt.processing'), msg.id);
 
     const sendApiRequest = async () => {
       console.log('Perguntando ao ChatGPT');

@@ -4,9 +4,10 @@ import { i18n } from '../utils/index.js';
 import { Message } from '@open-wa/wa-automate-types-only';
 
 export const command: Command = {
-  name: 'everyone',
-  aliases: ['all', 'todos'],
-  description: i18n.__mf('ping.description'),
+  name: 'todos',
+  aliases: ['t'],
+  description: i18n.__('ping.description'),
+  groupOnly: true,
   async execute(msg: Message, args: string[]): Promise<void> {
     if (!msg.chat.isGroup) return;
 

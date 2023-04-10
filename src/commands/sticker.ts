@@ -7,15 +7,15 @@ import { decryptMedia } from '@open-wa/wa-decrypt';
 export const command: Command = {
   name: 'sticker',
   aliases: ['fig', 'f'],
-  description: i18n.__mf('sticker.description'),
+  description: i18n.__('sticker.description'),
   async execute(msg: Message, args: string[]): Promise<void> {
     if (!isValidUsage(msg)) return;
-    await bot.client.reply(msg.chatId, i18n.__mf('sticker.receivedRequest'), msg.id);
+    await bot.client.reply(msg.chatId, i18n.__('sticker.receivedRequest'), msg.id);
 
     const { dataUrl, isVideo } = await getDecryptedMediaData(msg);
     const crop = args.includes('crop');
-    const author = i18n.__mf('bot.name');
-    const pack = i18n.__mf('sticker.pack');
+    const author = i18n.__('bot.name');
+    const pack = i18n.__('sticker.pack');
 
     if (isVideo) {
       await bot.client.sendMp4AsSticker(msg.from, dataUrl, { crop }, { author, pack });

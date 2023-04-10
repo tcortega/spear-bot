@@ -23,7 +23,7 @@ export async function handleMessage(message: Message): Promise<void> {
     await command.execute(message, args);
   } catch (error) {
     console.error(error);
-    await bot.client.reply(message.chatId, i18n.__mf('common.error'), message.id);
+    await bot.client.reply(message.chatId, i18n.__('common.error'), message.id);
   }
 }
 
