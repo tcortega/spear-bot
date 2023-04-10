@@ -17,7 +17,7 @@ export const config: Config = {
 
 if (!config.SOCKET_API_URL || !config.SOCKET_API_KEY) {
   throw new Error(
-    "Missing SOCKET_API_URL or SOCKET_API_KEY environment variables.",
+    'Missing SOCKET_API_URL or SOCKET_API_KEY environment variables.',
   );
 }
 
