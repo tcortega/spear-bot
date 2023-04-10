@@ -1,7 +1,8 @@
 import { Command } from '../types/bot/command.js';
-import { bot, version } from '../index.js';
+import { bot } from '../index.js';
 import { i18n } from '../utils/index.js';
 import { Message } from '@open-wa/wa-automate-types-only';
+import { version } from '../version.js';
 
 export const command: Command = {
   name: 'versao',
