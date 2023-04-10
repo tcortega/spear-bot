@@ -1,7 +1,7 @@
 {
   "ping": {
-    "description": "Mostra a média do tempo de resposta do bot.",
-    "result": "📈 Ping médio do Bot: {ping} ms"
+    "description": "📈 Mostra o tempo médio de resposta do bot.",
+    "result": "📈 Ping médio do Bot: {ping} segundos"
   },
   "imagine": {
     "description": "Gera uma imagem a partir do texto enviado.",
