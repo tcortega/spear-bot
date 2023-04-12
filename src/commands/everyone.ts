@@ -6,7 +6,7 @@ import { Message } from '@open-wa/wa-automate-types-only';
 export const command: Command = {
   name: 'todos',
   aliases: ['t'],
-  description: i18n.__('ping.description'),
+  description: i18n.__('todos.description'),
   groupOnly: true,
   async execute(msg: Message, args: string[]): Promise<void> {
     if (!msg.chat.isGroup) return;

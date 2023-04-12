@@ -33,6 +33,9 @@
     "processing": "⏳ Estou pensando na resposta, só um segundinho...",
     "missingApiKey": "❌ É preciso configurar as chaves de acesso ao ChatGPT..."
   },
+  "todos": {
+    "description": "🗣️ Marca todos membros do grupo"
+  },
   "help": {
     "description": "ℹ️ Exibe a lista de comandos disponíveis e suas descrições",
 	"title": "*🤖 Comandos do Bot 🤖*\n\n",
