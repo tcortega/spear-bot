@@ -26,22 +26,37 @@
     "disabled": "❌ A partir de agora não vou mais enviar os dados da eleição aqui."
   },
   "chatgpt": {
-    "description": "🤖 Converse com o robô",
-    "usage": "ℹ️ Use '!c reset' para redefinir uma conversa. Use '!c' seguido de uma mensagem para conversar com a IA.",
-    "error": "❌ Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente mais tarde.",
-    "reset": "✅ Conversa redefinida com sucesso.",
-    "processing": "⏳ Estou pensando na resposta, só um segundinho...",
-    "missingApiKey": "❌ É preciso configurar as chaves de acesso ao ChatGPT..."
+    "description": "🤖 Converse com o ChatGPT",
+    "missingApiKey": "⚠️ A chave API do OpenAI está faltando. Por favor, adicione a chave no arquivo de configuração.",
+    "usage": "ℹ️ Para usar é só digitar: !conversar <mensagem>\nPara usar um prompt: !conversar p:<id> <mensagem>\nPara redefinir uma conversa: !conversar reset",
+    "reset": "🔄 Conversa redefinida com sucesso!",
+    "processing": "⏳ Processando...",
+    "invalidPromptId": "⚠️ ID de prompt inválido. Por favor, verifique e tente novamente.",
+    "promptNotFound": "⚠️ Prompt não encontrado. Verifique o ID e tente novamente.",
+    "promptsUsage": "ℹ️ Uso do prompt: !conversar p:<id> <mensagem>"
   },
   "todos": {
     "description": "🗣️ Marca todos membros do grupo"
   },
+  "prompts": {
+    "description": "📄 Listar os prompts disponíveis de forma paginada",
+    "noPrompts": "⚠️ Nenhum prompt encontrado para o número de página fornecido.",
+    "list": "📄 Prompts (Página {page}):\n\n",
+    "item": "🔸 *{id}. {title}*\nDescrição: {description}\nUso: {usage}\n\n"
+  },
+  "search": {
+    "description": "🔍 Pesquisar prompts por título ou teaser",
+    "noQuery": "❌ Por favor, forneça uma consulta de pesquisa.",
+    "noResults": "⚠️ Nenhum resultado encontrado.",
+    "results": "🔍 Resultados da pesquisa:\n\n",
+    "item": "🔸 *{id}. {title}*\nDescrição: {description}\nUso: {usage}\n\n"
+  },
   "help": {
     "description": "ℹ️ Exibe a lista de comandos disponíveis e suas descrições",
-	"title": "*🤖 Comandos do Bot 🤖*\n\n",
-	"groupOnly": "👥 *Apenas para grupos*\n",
-	"adminOnly": "⚠️ *Apenas para administradores*\n",
-	"aliases": "🔀 *Apelidos:* {aliases}\n"
+    "title": "*🤖 Comandos do Bot 🤖*\n\n",
+    "groupOnly": "👥 *Apenas para grupos*\n",
+    "adminOnly": "⚠️ *Apenas para administradores*\n",
+    "aliases": "🔀 *Apelidos:* {aliases}\n"
   },
   "version": {
     "description": "ℹ️ Mostra a versão atual do bot",

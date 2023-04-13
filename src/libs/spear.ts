@@ -6,11 +6,13 @@ import { config, isValidScriptFile } from '../utils/index.js';
 import Collection from './collection.js';
 import { fileURLToPath } from 'node:url';
 import fs from 'fs/promises';
+import AIPRMWrapper from './aiprm.js';
 
 export default class Spear {
   public prefix = '!';
   public client!: Client & SocketClient;
   public commands = new Collection<string, Command>();
+  public aiprm: AIPRMWrapper = new AIPRMWrapper();
   private callbackId: string;
 
   public async start(): Promise<void> {

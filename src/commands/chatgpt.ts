@@ -38,6 +38,32 @@ export const command: Command = {
       return;
     }
 
+    let query = '';
+    if (firstArg.startsWith('p:')) {
+      if (args.length < 2) {
+        await bot.client.reply(msg.chatId, i18n.__('chatgpt.promptsUsage'), msg.id);
+        return;
+      }
+
+      const stringId = args.shift().substring(2, firstArg.length);
+      const promptId = parseInt(stringId);
+      if (isNaN(promptId)) {
+        await bot.client.reply(msg.chatId, i18n.__('chatgpt.invalidPromptId'), msg.id);
+        return;
+      }
+
+      const prompt = bot.aiprm.getById(promptId);
+      if (!prompt) {
+        await bot.client.reply(msg.chatId, i18n.__('chatgpt.promptNotFound'), msg.id);
+        return;
+      }
+
+      const promptText = args.join(' ');
+      query = prompt.prompt.replaceAll('[PROMPT]', promptText).replaceAll('[TARGETLANGUAGE]', 'In the same language as the one used in the question from the user or of the given instructions, usually surrounded by quotes.');
+    } else {
+      query = args.join(' ');
+    }
+
     const conversationData = conversations.get(author) ?? {};
     const messageOptions = { ...conversationData };
 
@@ -45,7 +71,7 @@ export const command: Command = {
 
     const sendApiRequest = async () => {
       console.log('Perguntando ao ChatGPT');
-      const res = await api.sendMessage(args.join(' '), messageOptions);
+      const res = await api.sendMessage(query, messageOptions);
       console.log('Recebi resposta do ChatGPT...');
 
       if (isObjectEmpty(conversationData)) {
