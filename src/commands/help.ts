@@ -3,35 +3,43 @@ import { bot } from '../index.js';
 import { i18n } from '../utils/index.js';
 import { Message } from '@open-wa/wa-automate-types-only';
 
+let cachedMessage: string;
+
 export const command: Command = {
-    name: 'ajuda',
-    aliases: ['h', 'a', 'comandos'],
-    description: i18n.__('help.description'),
-    async execute(msg: Message): Promise<void> {
-        const commands = bot.commands.toArray();
+  name: 'ajuda',
+  aliases: ['h', 'a', 'comandos'],
+  description: i18n.__('help.description'),
+  async execute(msg: Message): Promise<void> {
+    if (cachedMessage) {
+      await bot.client.reply(msg.chatId, cachedMessage, msg.id);
+      return;
+    }
 
-        let response = i18n.__('help.title');
-        commands.forEach((cmd) => {
-            if (cmd.disabled) return;
+    const commands = bot.commands.toArray();
 
-            response += `*!${cmd.name}*\n${cmd.description}\n`;
+    let response = i18n.__('help.title');
+    commands.forEach((cmd) => {
+      if (cmd.disabled) return;
 
-            if (cmd.aliases) {
-                const aliases = cmd.aliases.join(', ');
-                response += i18n.__mf('help.aliases', { aliases });
-            }
+      response += `*!${cmd.name}*\n${cmd.description}\n`;
 
-            if (cmd.adminOnly) {
-                response += i18n.__('help.adminOnly');
-            }
+      if (cmd.aliases) {
+        const aliases = cmd.aliases.join(', ');
+        response += i18n.__mf('help.aliases', { aliases });
+      }
 
-            if (cmd.groupOnly) {
-                response += i18n.__('help.groupOnly');
-            }
+      if (cmd.adminOnly) {
+        response += i18n.__('help.adminOnly');
+      }
 
-            response += '\n';
-        });
+      if (cmd.groupOnly) {
+        response += i18n.__('help.groupOnly');
+      }
 
-        await bot.client.reply(msg.chatId, response.trim(), msg.id)
-    },
+      response += '\n';
+    });
+
+    cachedMessage = response.trim();
+    await bot.client.reply(msg.chatId, cachedMessage, msg.id);
+  },
 };

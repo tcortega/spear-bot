@@ -2,17 +2,17 @@ import { Command } from '../types/bot/command.js';
 import { bot } from '../index.js';
 import { config, i18n } from '../utils/index.js';
 import { Message } from '@open-wa/wa-automate-types-only';
-import { ChatGPTUnofficialProxyAPI } from '@tcortega/chatgpt';
+import { ChatGPTUnofficialProxyAPI, SendMessageBrowserOptions } from '@tcortega/chatgpt';
 import PQueue from 'p-queue';
 
 const queue = new PQueue({ concurrency: 1 });
 
 const api = new ChatGPTUnofficialProxyAPI({
   accessToken: config.OPENAI_ACCESS_TOKEN,
-  apiReverseProxyUrl: 'https://bypass.churchless.tech/api/conversation',
+  apiReverseProxyUrl: config.OPENAI_BYPASS_URL,
 });
 
-const conversations = new Map<string, { conversationId: string; parentMessageId: string }>();
+const conversations = new Map<string, ConversationData>();
 
 export const command: Command = {
   name: 'conversar',
@@ -59,34 +59,51 @@ export const command: Command = {
       }
 
       const promptText = args.join(' ');
-      query = prompt.prompt.replaceAll('[PROMPT]', promptText).replaceAll('[TARGETLANGUAGE]', 'In the same language as the one used in the question from the user or of the given instructions, usually surrounded by quotes.');
+      query = prompt.prompt
+        .replaceAll('[PROMPT]', promptText)
+        .replaceAll(
+          '[TARGETLANGUAGE]',
+          'In the same language as the one used in the question from the user or of the given instructions, usually surrounded by quotes.',
+        );
     } else {
       query = args.join(' ');
     }
 
     const conversationData = conversations.get(author) ?? {};
-    const messageOptions = { ...conversationData };
 
     await bot.client.reply(msg.chatId, i18n.__('chatgpt.processing'), msg.id);
 
-    const sendApiRequest = async () => {
-      console.log('Perguntando ao ChatGPT');
-      const res = await api.sendMessage(query, messageOptions);
-      console.log('Recebi resposta do ChatGPT...');
-
-      if (isObjectEmpty(conversationData)) {
-        conversations.set(author, { conversationId: res.conversationId, parentMessageId: res.id });
-      } else {
-        conversationData['parentMessageId'] = res.id;
-      }
-
-      await bot.client.reply(msg.chatId, res.text, msg.id);
-    };
-
-    await queue.add(sendApiRequest);
+    // @ts-ignore
+    await queue.add(() => makeChatGptRequest(msg, author, query, conversationData));
   },
 };
+
+async function makeChatGptRequest(
+  msg: Message,
+  author: string,
+  query: string,
+  conversationData: ConversationData,
+): Promise<void> {
+  const messageOptions: SendMessageBrowserOptions = { ...conversationData, timeoutMs: 30000 };
+
+  try {
+    const res = await api.sendMessage(query, messageOptions);
+
+    if (isObjectEmpty(conversationData)) {
+      conversations.set(author, { conversationId: res.conversationId, parentMessageId: res.id });
+    } else {
+      conversationData.parentMessageId = res.id;
+    }
+
+    await bot.client.reply(msg.chatId, res.text, msg.id);
+  } catch (error) {
+    console.error('Error occurred while processing ChatGPT request:', error.message);
+    await bot.client.reply(msg.chatId, i18n.__('chatgpt.error'), msg.id);
+  }
+}
 
 const isObjectEmpty = (objectName) => {
   return Object.keys(objectName).length === 0 && objectName.constructor === Object;
 };
+
+type ConversationData = { conversationId: string; parentMessageId: string };

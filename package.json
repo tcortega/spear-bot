@@ -22,9 +22,13 @@
   "dependencies": {
     "@open-wa/wa-automate-socket-client": "^3.2.0",
     "@open-wa/wa-decrypt": "^4.4.0",
+    "@prisma/client": "^4.14.1",
     "@tcortega/chatgpt": "^5.4.2",
+    "@tcortega/twitter-scraper": "^0.2.4",
+    "axios": "^1.4.0",
     "dotenv": "^16.0.3",
     "i18n": "^0.15.0",
+    "node-cache": "^5.1.2",
     "p-queue": "^7.3.4"
   },
   "devDependencies": {
@@ -35,6 +39,7 @@
     "gts": "^3.1.0",
     "nodemon": "^2.0.19",
     "prettier": "^2.7.1",
+    "prisma": "^4.14.1",
     "ts-node": "^10.9.1",
     "tslib": "^2.4.1",
     "typescript": "^5.0.3"

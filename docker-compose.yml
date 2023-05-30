@@ -1,8 +1,9 @@
 version: '3.9'
 services:
   db:
+    container_name: pgsql-db
     image: postgres
-    hostname: plsql-db
+    hostname: pgsql-db
     ports:
       - '5432:5432'
     volumes:
@@ -14,8 +15,11 @@ services:
     restart: always
 
   socket-server:
+    container_name: socket-server
     image: openwa/wa-automate:latest
     restart: always
+    depends_on:
+      - db
     hostname: socket-server
     command: ['--socket', '--license-key <YOUR_LICENSE>', '-k spear_secret_key']
     ports:
@@ -24,16 +28,19 @@ services:
       - 'socketdata:/usr/src/app'
 
   spear-bot:
-    image: tcortega/spear-bot:1.2.0
+    container_name: spear-bot
+    image: tcortega/spear-bot:latest
     restart: always
     depends_on:
       - socket-server
     hostname: spear-bot
     environment:
+      - 'DATABASE_URL=postgresql://postgres:P4$$$$w0rd@pgsql-db:5432/Spear'
       - 'LOCALE=pt_BR'
       - 'SOCKET_API_URL=http://socket-server:8002'
       - 'SOCKET_API_KEY=spear_secret_key'
       - 'OPENAI_ACCESS_TOKEN=<YOUR_ACCESS_TOKEN>'
+      - 'OPENAI_BYPASS_URL=https://ai.fakeopen.com/api/conversation'
 
 volumes:
   pgsqldata:

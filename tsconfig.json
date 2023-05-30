@@ -7,6 +7,8 @@
     "target": "es2022",
     "moduleResolution": "nodenext",
     "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "resolveJsonModule": true,
     "importHelpers": true,
     "strictPropertyInitialization": false

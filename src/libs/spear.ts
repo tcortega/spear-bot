@@ -1,5 +1,5 @@
 import { Client, SimpleListener, SocketClient } from '@open-wa/wa-automate-socket-client';
-import { handleMessage } from '../handlers/index.js';
+import { handleAddedToGroup, handleMessage } from '../handlers/index.js';
 import path, { dirname } from 'path';
 import { Command } from '../types/bot/command.js';
 import { config, isValidScriptFile } from '../utils/index.js';
@@ -13,7 +13,7 @@ export default class Spear {
   public client!: Client & SocketClient;
   public commands = new Collection<string, Command>();
   public aiprm: AIPRMWrapper = new AIPRMWrapper();
-  private callbackId: string;
+  private registeredListeners = new Map<string, SimpleListener>();
 
   public async start(): Promise<void> {
     await this.loadCommands();
@@ -21,12 +21,12 @@ export default class Spear {
 
     this.client.socket.on('connect', async () => {
       console.log('🚀 ~ file: spear.ts ~ line 22 ~ start');
-      this.callbackId = await this.registerOnMessage();
+      await this.registerListeners();
     });
 
     this.client.socket.on('disconnect', () => {
       console.log('🔌 ~ file: spear.ts ~ line 27 ~ start');
-      this.unregisterOnMessage();
+      this.unregisterListeners();
     });
 
     this.client.socket.on('connect_error', () => {
@@ -36,18 +36,22 @@ export default class Spear {
     this.client.socket.io.on('reconnect', () => {
       console.log('⏳ ~ file: spear.ts ~ line 36 ~ Reconnecting...');
     });
-
-    // await apiWrapper.initializeApis();
   }
 
-  private async registerOnMessage(): Promise<string> {
-    // Register the onMessage handler
-    return await this.client.listen(SimpleListener.Message, handleMessage);
+  private async registerListeners(): Promise<void> {
+    const messageCallback = await this.client.listen(SimpleListener.Message, handleMessage);
+    const addedToGroupCallback = await this.client.listen(SimpleListener.AddedToGroup, handleAddedToGroup);
+
+    this.registeredListeners.set(messageCallback, SimpleListener.Message);
+    this.registeredListeners.set(addedToGroupCallback, SimpleListener.AddedToGroup);
   }
 
-  private unregisterOnMessage(): void {
-    // Unregister the onMessage handler
-    this.client.stopListener(SimpleListener.Message, this.callbackId);
+  private unregisterListeners(): void {
+    for (const [callbackId, listener] of this.registeredListeners) {
+      this.client.stopListener(listener, callbackId);
+    }
+
+    this.registeredListeners.clear();
   }
 
   private async loadCommands(): Promise<void> {

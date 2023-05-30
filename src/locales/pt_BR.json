@@ -10,7 +10,8 @@
     "nsfw": "🔞 Você não pode tentar imaginar isso aqui, é muito perigoso! Olha em que mês estamos!!!!"
   },
   "common": {
-    "error": "❌ Ocorreu um erro inesperado, tente novamente mais tarde."
+    "error": "❌ Ocorreu um erro inesperado, tente novamente mais tarde.",
+    "greeting": "👋 Olá! Eu sou o ZapBot, seu assistente pessoal aqui no Whatsapp.\n\nEstou pronto para ajudar com suas tarefas. Para ver todos os meus comandos disponíveis, comece digitando *!ajuda*.\n\nEstou à sua disposição!"
   },
   "sticker": {
     "description": "🎨 Gera um sticker a partir de uma mídia enviada junta ao comando, ou à uma mídia respondida.",
@@ -18,7 +19,7 @@
     "pack": "Criado Por"
   },
   "bot": {
-    "name": "Spear"
+    "name": "ZapBot"
   },
   "eleicao": {
     "description": "Comando que habilita bot a mandar resultados da eleição no grupo/chat utilizado",
@@ -33,7 +34,8 @@
     "processing": "⏳ Processando...",
     "invalidPromptId": "⚠️ ID de prompt inválido. Por favor, verifique e tente novamente.",
     "promptNotFound": "⚠️ Prompt não encontrado. Verifique o ID e tente novamente.",
-    "promptsUsage": "ℹ️ Uso do prompt: !conversar p:<id> <mensagem>"
+    "promptsUsage": "ℹ️ Uso do prompt: !conversar p:<id> <mensagem>",
+    "error": "❌ Ocorreu um erro durante a execução, tente novamente mais tarde..."
   },
   "todos": {
     "description": "🗣️ Marca todos membros do grupo"
@@ -61,5 +63,18 @@
   "version": {
     "description": "ℹ️ Mostra a versão atual do bot",
     "result": "🤖 Versão atual do bot: {version}"
+  },
+  "stableDiffusion": {
+    "description": "🎨 Gere uma imagem com base em um *prompt*, com valores opcionais de largura, altura e seed.",
+    "usage": "Uso: !img \"<prompt>\" [h:<altura>] [w:<largura>] [s:<seed>]",
+    "invalidPrompt": "❌ Formato de *prompt* inválido. Por favor, use aspas duplas ao redor do texto do *prompt*.",
+    "processing": "⏳ Processando sua solicitação. Por favor, aguarde...",
+    "error": "❌ Ocorreu um erro ao processar sua solicitação. Por favor, tente novamente."
+  },
+  "twitter": {
+    "description": "🐦 Baixe mídia de um tweet através da URL.",
+    "usage": "ℹ️ Para usar, digite: !twitter <URL do tweet>\nAlternativamente, você pode usar: !tt <URL do tweet>",
+    "invalidUrl": "❌ A URL fornecida não é válida ou não pertence a um tweet.",
+    "notMedia": "⚠️ O tweet fornecido não contém mídia que possa ser baixada."
   }
 }

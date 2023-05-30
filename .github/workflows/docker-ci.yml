@@ -30,7 +30,7 @@ jobs:
 
       - name: Update version in src/version.ts
         run: sed -i "s/^export const version = .*;$/export const version = '${{ env.VERSION }}';/" src/version.ts
-  
+
       - name: Commit updated version file
         run: |
           git config --global user.name "GitHub Actions"

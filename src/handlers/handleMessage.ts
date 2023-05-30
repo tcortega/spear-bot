@@ -1,10 +1,30 @@
-import { bot } from '../index.js';
+import NodeCache from 'node-cache';
+import { bot, prisma } from '../index.js';
 import { Command } from '../types/bot/command.js';
 import { i18n } from '../utils/index.js';
 import { GroupChatId, Message } from '@open-wa/wa-automate-types-only';
 
+const userCache = new NodeCache({ stdTTL: 60 * 60 * 24 * 1 }); // Cache for 1 day
+
+async function handleGreeting(message: Message): Promise<void> {
+  const isOnCache = userCache.has(message.from);
+  if (isOnCache) return;
+
+  let user = await prisma.user.findUnique({ where: { id: message.from } });
+  if (user) {
+    userCache.set(message.from, true); // Sets as true so it only takes 1 bit of memory
+    return;
+  }
+
+  await bot.client.sendText(message.chatId, i18n.__('common.greeting'));
+
+  user = await prisma.user.create({ data: { id: message.from } });
+  userCache.set(message.from, user);
+}
+
 export async function handleMessage(message: Message): Promise<void> {
   if (message.fromMe || !message.text) return;
+  if (!message.isGroupMsg) handleGreeting(message);
 
   const commandRegex = new RegExp(`^${bot.prefix}(\\w+.*)$`, 's');
   const matches = message.text.match(commandRegex);
