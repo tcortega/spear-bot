@@ -55,3 +55,4 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: tcortega/spear-bot:latest, tcortega/spear-bot:${{ env.VERSION }}
+          platforms: linux/amd64,linux/arm64
